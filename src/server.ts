@@ -1,17 +1,13 @@
 import Fastify, { FastifyReply, FastifyRequest } from 'fastify'
+import { registerRoutes } from './app/routes'
 
-const fastify = Fastify({
+const app = Fastify({
   logger: true
 })
 
-fastify.get('/ping', async (request: FastifyRequest, reply: FastifyReply) => {
-  return 'Pong!'
+app.register(registerRoutes)
+
+app.listen({ port: 3333 }).then(() => {
+  console.log('🚀 Servidor rodando em http://localhost:3333')
 })
 
-fastify.listen({ port: 8080 }, (err, address) => {
-  if (err) {
-    console.error(err)
-    process.exit(1)
-  }
-  console.log(`Server listening at ${address}`)
-})
