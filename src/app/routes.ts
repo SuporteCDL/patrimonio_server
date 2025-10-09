@@ -1,10 +1,9 @@
 import { FastifyInstance } from 'fastify'
 import { usuariosRoutes } from '../modules/usuarios/uruarios.routes'
+import { gruposRoutes } from '../modules/grupos/grupos.routes'
 
 export async function registerRoutes(app: FastifyInstance) {
-  // Rotas de usuários
   app.register(usuariosRoutes, { prefix: '/usuarios' })
+  app.register(gruposRoutes, { prefix: '/grupos' })
 
-  // Caso tenha outros módulos, registre aqui também:
-  // app.register(productsRoutes, { prefix: '/products' })
 }

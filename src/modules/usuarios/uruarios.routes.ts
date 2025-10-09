@@ -1,12 +1,12 @@
 import { FastifyInstance } from 'fastify'
-import { getUsers, createUser } from './usuarios.controller'
-import { criarEsquemaUsuario } from './usuarios.schema'
+import { getUsers, createUser, updateUser, deleteUser } from './usuarios.controller'
 
 export async function usuariosRoutes(app: FastifyInstance) {
   app.get('/', getUsers)
 
-  app.post('/', {
-    schema: { body: criarEsquemaUsuario },
-    handler: createUser,
-  })
+  app.post('/', createUser)
+
+  app.put('/', updateUser)
+
+  app.delete('/', deleteUser)
 }

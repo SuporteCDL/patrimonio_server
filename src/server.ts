@@ -1,4 +1,4 @@
-import Fastify, { FastifyReply, FastifyRequest } from 'fastify'
+import Fastify from 'fastify'
 import { registerRoutes } from './app/routes'
 
 const app = Fastify({
@@ -7,7 +7,7 @@ const app = Fastify({
 
 app.register(registerRoutes)
 
-app.listen({ port: 3333 }).then(() => {
-  console.log('🚀 Servidor rodando em http://localhost:3333')
+app.listen({ host: '0.0.0.0', port: 3333 }).then(() => {
+  console.log('🚀 Servidor rodando em http://192.168.2.106:3333')
 })
 
