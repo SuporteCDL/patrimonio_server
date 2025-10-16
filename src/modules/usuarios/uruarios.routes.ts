@@ -6,7 +6,7 @@ export async function usuariosRoutes(app: FastifyInstance) {
 
   app.post('/', createUser)
 
-  app.put('/', updateUser)
+  app.put('/:id', updateUser)
 
-  app.delete('/', deleteUser)
+  app.delete('/:id', deleteUser)
 }

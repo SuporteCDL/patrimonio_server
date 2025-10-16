@@ -7,12 +7,22 @@ interface ISubGrupo {
 }
 
 async function listar() {
-  return await db('subgrupos').select('*')
+  return await db('subgrupos')
+  .select('*')
+  .orderBy('descricao')
+}
+
+async function listarPorGrupo() {
+  return await db('subgrupos')
+  .join('grupos', 'subgrupos.codgrupo', '=', 'grupos.id')
+  .select('grupos.descricao as grupo', 'subgrupos.id', 'subgrupos.descricao')
+  .orderBy('grupos.descricao','asc')
+  .orderBy('subgrupos.descricao','asc')
 }
 
 async function criar(dados: Omit<ISubGrupo, 'id'>) {
-  const [subGrupo] = await db('subGrupos').insert({
-    codgrupo: dados.codgrupo,
+  const [subGrupo] = await db('subgrupos').insert({
+    codgrupo: Number(dados.codgrupo),
     descricao: dados.descricao,
   })
   .returning('*')
@@ -20,10 +30,10 @@ async function criar(dados: Omit<ISubGrupo, 'id'>) {
 }
 
 async function alterar(dados: ISubGrupo) {
-  const [subGrupo] = await db('subGrupos')
+  const [subGrupo] = await db('subgrupos')
   .where({ id: Number(dados.id)})
   .update({
-    codgrupo: dados.codgrupo,
+    codgrupo: Number(dados.codgrupo),
     descricao: dados.descricao,
   })
   .returning('*')
@@ -31,10 +41,10 @@ async function alterar(dados: ISubGrupo) {
 }
 
 async function excluir(id: Number) {
-  await db('subGrupos')
+  await db('subgrupos')
   .where({ id: id})
   .delete()
   return 
 }
 
-export const subGrupoService = { listar, criar, alterar, excluir }
+export const subGrupoService = { listar, listarPorGrupo, criar, alterar, excluir }

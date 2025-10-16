@@ -6,7 +6,7 @@ export async function marcasRoutes(app: FastifyInstance) {
 
   app.post('/', createMarca)
 
-  app.put('/', updateMarca)
+  app.put('/:id', updateMarca)
   
-  app.delete('/', deleteMarca)
+  app.delete('/:id', deleteMarca)
 }

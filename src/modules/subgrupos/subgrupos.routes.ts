@@ -1,12 +1,14 @@
 import { FastifyInstance } from "fastify";
-import { createSubGrupo, deleteSubGrupo, getSubGrupos, updateSubGrupo } from "./subgrupos.controller";
+import { createSubGrupo, deleteSubGrupo, getSubGrupos, getSubGruposPorGrupo, updateSubGrupo } from "./subgrupos.controller";
 
 export async function subGruposRoutes(app: FastifyInstance) {
-  app.get('/', getSubGrupos)
+  // app.get('/', getSubGrupos)
+
+  app.get('/', getSubGruposPorGrupo)
 
   app.post('/', createSubGrupo)
   
-  app.put('/', updateSubGrupo)
+  app.put('/:id', updateSubGrupo)
   
-  app.delete('/', deleteSubGrupo)
+  app.delete('/:id', deleteSubGrupo)
 }

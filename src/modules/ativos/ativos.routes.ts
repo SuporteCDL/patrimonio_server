@@ -6,7 +6,7 @@ export async function ativosRoutes(app: FastifyInstance) {
 
   app.post('/', createAtivo)
 
-  app.put('/', updateAtivo)
+  app.put('/:id', updateAtivo)
   
-  app.delete('/', deleteAtivo)
+  app.delete('/:id', deleteAtivo)
 }

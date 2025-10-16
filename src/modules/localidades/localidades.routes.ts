@@ -6,7 +6,7 @@ export async function localidadesRoutes(app: FastifyInstance) {
 
   app.post('/', createLocalidade)
 
-  app.put('/', updateLocalidade)
+  app.put('/:id', updateLocalidade)
   
-  app.delete('/', deleteLocalidade)
+  app.delete('/:id', deleteLocalidade)
 }

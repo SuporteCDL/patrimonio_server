@@ -1,3 +1,4 @@
+import { hash, compare } from 'bcrypt'
 import { db } from "../../database/knex" 
 
 interface IUsuario {
@@ -8,7 +9,20 @@ interface IUsuario {
 }
 
 async function listar() {
-  return await db('usuarios').select('*')
+  return await db('usuarios').select('*').orderBy('nome')
+}
+
+async function logar(dados: Omit<IUsuario, 'id'>) {
+  const [usuario] = await db('usuarios')
+  .select()
+  .where('email', dados.email)
+  .returning('*')
+  const isAuthenticate = await compare(dados.password, usuario.password)
+  if (isAuthenticate) {
+    return usuario
+  } else {
+    return null
+  }
 }
 
 async function criar(dados: Omit<IUsuario, 'id'>) {
@@ -29,7 +43,6 @@ async function alterar(dados: IUsuario) {
     .update({
       nome: dados.nome,
       email: dados.email,
-      password: dados.password,
     })
     .returning('*')
 
@@ -45,4 +58,4 @@ async function excluir(id: Number) {
   return usuario
 }
 
-export const usuarioService = { listar, criar, alterar, excluir }
+export const usuarioService = { listar, logar, criar, alterar, excluir }

@@ -6,7 +6,7 @@ export async function gruposRoutes(app: FastifyInstance) {
 
   app.post('/', createGrupo)
   
-  app.put('/', updateGrupo)
+  app.put('/:id', updateGrupo)
   
-  app.delete('/', deleteGrupo)
+  app.delete('/:id', deleteGrupo)
 }

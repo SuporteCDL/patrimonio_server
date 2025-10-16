@@ -6,7 +6,7 @@ interface ICentroCusto {
 }
 
 async function listar() {
-  return await db('centro_custo').select('*')
+  return await db('centro_custo').select('*').orderBy('descricao')
 }
 
 async function criar(dados: Omit<ICentroCusto, 'id'>) {

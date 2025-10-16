@@ -6,7 +6,7 @@ export async function centroCustoRoutes(app: FastifyInstance) {
   
   app.post('/', createCentroCusto)
   
-  app.put('/', updateCentroCusto)
+  app.put('/:id', updateCentroCusto)
   
-  app.delete('/', deleteCentroCusto)
+  app.delete('/:id', deleteCentroCusto)
 }
